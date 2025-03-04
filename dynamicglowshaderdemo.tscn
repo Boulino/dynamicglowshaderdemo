@@ -1,14 +1,15 @@
-[gd_scene load_steps=25 format=3 uid="uid://ctmytx1og1638"]
+[gd_scene load_steps=26 format=3 uid="uid://ctmytx1og1638"]
 
 [ext_resource type="Texture2D" uid="uid://cks4voy6ge60v" path="res://well.png" id="1_gmoni"]
 [ext_resource type="Material" uid="uid://ndqlm67idgj0" path="res://fieryglow.tres" id="2_wpby4"]
 [ext_resource type="Texture2D" uid="uid://cx1ix6xgejtu3" path="res://well_inverted.png" id="3_vd1k7"]
 [ext_resource type="Texture2D" uid="uid://bxk65tco4rkf2" path="res://ninja.png" id="4_h15dg"]
-[ext_resource type="Shader" path="res://fieryglow.gdshader" id="5_mrlkv"]
+[ext_resource type="Shader" uid="uid://bbjwickt7a8bo" path="res://fieryglow.gdshader" id="5_mrlkv"]
 [ext_resource type="Texture2D" uid="uid://d1q60e22fc88b" path="res://ninja_inverted.png" id="6_rmks3"]
 [ext_resource type="Texture2D" uid="uid://cme7ihqy71qk3" path="res://house.png" id="7_qnsii"]
 [ext_resource type="Texture2D" uid="uid://d2ng1nnfiqc8j" path="res://house_mask.png" id="8_hbkbp"]
-[ext_resource type="Script" path="res://house_mask_flicker.gd" id="9_6ec77"]
+[ext_resource type="Script" uid="uid://bcdby4khe466b" path="res://house_mask_flicker.gd" id="9_6ec77"]
+[ext_resource type="Script" uid="uid://lkwy4x2r3ngf" path="res://button.gd" id="10_1x3ih"]
 
 [sub_resource type="Curve" id="Curve_v2qae"]
 _data = [Vector2(0.197802, 0.281624), 0.0, 0.0, 0, 0, Vector2(0.758242, 0.398469), 0.0, 0.0, 0, 0, Vector2(1, 0.264314), 0.0, 0.0, 0, 0]
@@ -39,6 +40,8 @@ shader_parameter/fireball_scale_y = 1.73
 shader_parameter/glow_scale_y = 1.562
 shader_parameter/glow_strength = 6.345
 shader_parameter/glow_intensity = 0.565
+shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_a7fx0")
 shader_parameter/pixel_size = 1
 shader_parameter/glow_position = Vector2(-0.76, -0.78)
 shader_parameter/glow_size = Vector2(2.16, 2.67)
@@ -46,8 +49,6 @@ shader_parameter/pulsate = true
 shader_parameter/pulsation_speed = 0.305
 shader_parameter/glow_intensity_start = 0.66
 shader_parameter/glow_intensity_stop = 0.79
-shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
-shader_parameter/colo_curve = SubResource("CurveXYZTexture_a7fx0")
 
 [sub_resource type="Shader" id="Shader_qbeis"]
 code = "shader_type canvas_item;
@@ -148,12 +149,12 @@ shader_parameter/fireball_scale_y = 1.0
 shader_parameter/glow_scale_y = -2.275
 shader_parameter/glow_strength = 11.91
 shader_parameter/glow_intensity = 0.82
-shader_parameter/pixel_size = 1
-shader_parameter/glow_position = Vector2(-2.225, -3.57)
-shader_parameter/glow_size = Vector2(4.92, 8.25)
 shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_8n52y")
 shader_parameter/colo_curve = SubResource("CurveXYZTexture_jiftm")
+shader_parameter/pixel_size = 1
+shader_parameter/glow_position = Vector2(-2.225, -3.57)
+shader_parameter/glow_size = Vector2(4.92, 8.25)
 
 [node name="Node2D" type="Node2D"]
 
@@ -193,3 +194,31 @@ material = SubResource("ShaderMaterial_5s46m")
 position = Vector2(0, -1)
 texture = ExtResource("8_hbkbp")
 script = ExtResource("9_6ec77")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 961.0
+offset_bottom = 51.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Control/MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "EXIT"
+script = ExtResource("10_1x3ih")
+
+[connection signal="pressed" from="Control/MarginContainer/Button" to="Control/MarginContainer/Button" method="_on_pressed"]
