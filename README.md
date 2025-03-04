@@ -1,15 +1,17 @@
-## How to Set Up the Shader
+Check out my other stuff [here](https://illsen.com/links/).
+
+## Here’s How You Can Set Up the Shader:
 
 ### Create Sprite:
-- Add a `Sprite2D` node and assign a texture to it.
+- Add a `Sprite2D` node and assign your texture to it.
 
 ### Create Inverted Sprite:
 - Add another `Sprite2D` node.
-- Assign the inverted texture to this sprite.
-- Apply the shader material to this inverted sprite.
+- Assign a **color-inverted** version of the texture from step one to this sprite.
+- Apply the shader material to this color-inverted sprite.
 
 ### Ensure Both Sprites are Aligned:
-- Position the inverted sprite exactly on top of the original sprite.
+- Position the color-inverted sprite exactly on top of the original sprite.
 
 ### Configure the Shader Parameters:
 - Adjust the `glow_position`, `glow_size`, `glow_strength`, `glow_intensity`, and other parameters to fit your new sprite.
