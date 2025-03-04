@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://ndqlm67idgj0"]
 
-[ext_resource type="Shader" path="res://fieryglow.gdshader" id="1_t30i8"]
+[ext_resource type="Shader" uid="uid://bbjwickt7a8bo" path="res://fieryglow.gdshader" id="1_t30i8"]
 
 [sub_resource type="Curve" id="Curve_2plc8"]
 _data = [Vector2(0.206044, 0.195073), 0.0, 0.0, 0, 0, Vector2(1, 0.316245), 0.0, 0.0, 0, 0]
@@ -31,6 +31,8 @@ shader_parameter/fireball_scale_y = 1.0
 shader_parameter/glow_scale_y = -0.685
 shader_parameter/glow_strength = 6.15
 shader_parameter/glow_intensity = 0.77
+shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_jiftm")
 shader_parameter/pixel_size = 1
 shader_parameter/glow_position = Vector2(-0.855, -1.355)
 shader_parameter/glow_size = Vector2(2.35, 3.68)
@@ -38,5 +40,3 @@ shader_parameter/pulsate = true
 shader_parameter/pulsation_speed = 0.19
 shader_parameter/glow_intensity_start = 0.765
 shader_parameter/glow_intensity_stop = 1.15
-shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
-shader_parameter/colo_curve = SubResource("CurveXYZTexture_jiftm")
