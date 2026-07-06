@@ -1,5 +1,3 @@
-Check out my other stuff [here](https://illsen.com/links/).
-
 ## Here’s How You Can Set Up the Shader:
 
 ### Create Sprite:
