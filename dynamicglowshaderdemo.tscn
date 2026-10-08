@@ -1,7 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://ctmytx1og1638"]
+[gd_scene load_steps=51 format=3 uid="uid://ctmytx1og1638"]
 
 [ext_resource type="Texture2D" uid="uid://cks4voy6ge60v" path="res://well.png" id="1_gmoni"]
+[ext_resource type="Texture2D" uid="uid://bgijco0ten0pl" path="res://specki.png" id="1_rdkub"]
 [ext_resource type="Material" uid="uid://ndqlm67idgj0" path="res://fieryglow.tres" id="2_wpby4"]
+[ext_resource type="Texture2D" uid="uid://yx523i2c25r4" path="res://speckimask.png" id="3_n6wvv"]
 [ext_resource type="Texture2D" uid="uid://cx1ix6xgejtu3" path="res://well_inverted.png" id="3_vd1k7"]
 [ext_resource type="Texture2D" uid="uid://bxk65tco4rkf2" path="res://ninja.png" id="4_h15dg"]
 [ext_resource type="Shader" uid="uid://bbjwickt7a8bo" path="res://fieryglow.gdshader" id="5_mrlkv"]
@@ -10,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d2ng1nnfiqc8j" path="res://house_mask.png" id="8_hbkbp"]
 [ext_resource type="Script" uid="uid://bcdby4khe466b" path="res://house_mask_flicker.gd" id="9_6ec77"]
 [ext_resource type="Script" uid="uid://lkwy4x2r3ngf" path="res://button.gd" id="10_1x3ih"]
+[ext_resource type="Shader" uid="uid://qa2ppanif4m4" path="res://autoinvert.gdshader" id="10_bartd"]
 
 [sub_resource type="Curve" id="Curve_v2qae"]
 _data = [Vector2(0.197802, 0.281624), 0.0, 0.0, 0, 0, Vector2(0.758242, 0.398469), 0.0, 0.0, 0, 0, Vector2(1, 0.264314), 0.0, 0.0, 0, 0]
@@ -28,19 +31,18 @@ curve_x = SubResource("Curve_v2qae")
 curve_y = SubResource("Curve_osh4p")
 curve_z = SubResource("Curve_gbeoy")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gyedh"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sqlbc"]
 frequency = 0.0095
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ospg2"]
-noise = SubResource("FastNoiseLite_gyedh")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rdkub"]
+noise = SubResource("FastNoiseLite_sqlbc")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7w1kv"]
 shader = ExtResource("5_mrlkv")
-shader_parameter/fireball_scale_y = 1.73
 shader_parameter/glow_scale_y = 1.562
 shader_parameter/glow_strength = 6.345
 shader_parameter/glow_intensity = 0.565
-shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
+shader_parameter/noise = SubResource("NoiseTexture2D_rdkub")
 shader_parameter/colo_curve = SubResource("CurveXYZTexture_a7fx0")
 shader_parameter/pixel_size = 1
 shader_parameter/glow_position = Vector2(-0.76, -0.78)
@@ -49,6 +51,82 @@ shader_parameter/pulsate = true
 shader_parameter/pulsation_speed = 0.305
 shader_parameter/glow_intensity_start = 0.66
 shader_parameter/glow_intensity_stop = 0.79
+
+[sub_resource type="Curve" id="Curve_rdkub"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_io4ao"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 0.437212), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bc5gd"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 0.490494), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_tcqsq"]
+curve_x = SubResource("Curve_rdkub")
+curve_y = SubResource("Curve_io4ao")
+curve_z = SubResource("Curve_bc5gd")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tp21q"]
+frequency = 0.0095
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cgp7d"]
+noise = SubResource("FastNoiseLite_tp21q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgyxc"]
+shader = ExtResource("5_mrlkv")
+shader_parameter/glow_scale_y = 2.43
+shader_parameter/glow_strength = 1.865
+shader_parameter/glow_intensity = 0.765
+shader_parameter/noise = SubResource("NoiseTexture2D_cgp7d")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_tcqsq")
+shader_parameter/pixel_size = 1
+shader_parameter/glow_position = Vector2(-0.59, -1.225)
+shader_parameter/glow_size = Vector2(2.35, 3.68)
+shader_parameter/pulsate = true
+shader_parameter/pulsation_speed = 0.3
+shader_parameter/glow_intensity_start = 0.52
+shader_parameter/glow_intensity_stop = 1.0
+
+[sub_resource type="Curve" id="Curve_tcqsq"]
+_data = [Vector2(0, 0.189745), 0.0, 1.4, 0, 0, Vector2(1, 0.664722), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_tp21q"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_cgp7d"]
+_data = [Vector2(0, 0.189745), 0.0, 1.4, 0, 0, Vector2(1, 0.71661), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_kgyxc"]
+curve_x = SubResource("Curve_tcqsq")
+curve_y = SubResource("Curve_tp21q")
+curve_z = SubResource("Curve_cgp7d")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v67iy"]
+frequency = 0.0095
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h7pl8"]
+noise = SubResource("FastNoiseLite_v67iy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwivy"]
+shader = ExtResource("5_mrlkv")
+shader_parameter/glow_scale_y = 2.43
+shader_parameter/glow_strength = 1.97
+shader_parameter/glow_intensity = 0.765
+shader_parameter/noise = SubResource("NoiseTexture2D_h7pl8")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_kgyxc")
+shader_parameter/pixel_size = 1
+shader_parameter/glow_position = Vector2(-1.11, -1.225)
+shader_parameter/glow_size = Vector2(2.35, 3.68)
+shader_parameter/pulsate = true
+shader_parameter/pulsation_speed = 0.4
+shader_parameter/glow_intensity_start = 0.5
+shader_parameter/glow_intensity_stop = 1.0
 
 [sub_resource type="Shader" id="Shader_qbeis"]
 code = "shader_type canvas_item;
@@ -120,22 +198,22 @@ void fragment()
 }
 "
 
-[sub_resource type="Curve" id="Curve_2plc8"]
+[sub_resource type="Curve" id="Curve_n6wvv"]
 _data = [Vector2(0.206044, 0.195073), 0.0, 0.0, 0, 0, Vector2(1, 0.316245), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve" id="Curve_e1u05"]
+[sub_resource type="Curve" id="Curve_o8nmk"]
 _data = [Vector2(0.118132, 0.16478), 0.0, 0.0, 0, 0, Vector2(0.887363, 0.272969), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve" id="Curve_n6iqx"]
+[sub_resource type="Curve" id="Curve_kn78d"]
 _data = [Vector2(0.112108, 0), 0.0, 0.0, 0, 0, Vector2(0.910314, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_jiftm"]
-curve_x = SubResource("Curve_2plc8")
-curve_y = SubResource("Curve_e1u05")
-curve_z = SubResource("Curve_n6iqx")
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_io4ao"]
+curve_x = SubResource("Curve_n6wvv")
+curve_y = SubResource("Curve_o8nmk")
+curve_z = SubResource("Curve_kn78d")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4fad3"]
 frequency = 0.0023
@@ -149,27 +227,69 @@ shader_parameter/fireball_scale_y = 1.0
 shader_parameter/glow_scale_y = -2.275
 shader_parameter/glow_strength = 11.91
 shader_parameter/glow_intensity = 0.82
-shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
+shader_parameter/noise = SubResource("NoiseTexture2D_rdkub")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_8n52y")
-shader_parameter/colo_curve = SubResource("CurveXYZTexture_jiftm")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_io4ao")
 shader_parameter/pixel_size = 1
 shader_parameter/glow_position = Vector2(-2.225, -3.57)
 shader_parameter/glow_size = Vector2(4.92, 8.25)
 
+[sub_resource type="Curve" id="Curve_2plc8"]
+_data = [Vector2(0, 0.249616), 0.0, 1.4, 0, 0, Vector2(1, 0.437212), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_e1u05"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 0.437212), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_n6iqx"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 0.441204), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_jiftm"]
+curve_x = SubResource("Curve_2plc8")
+curve_y = SubResource("Curve_e1u05")
+curve_z = SubResource("Curve_n6iqx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gyedh"]
+frequency = 0.0095
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ospg2"]
+noise = SubResource("FastNoiseLite_gyedh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bartd"]
+shader = ExtResource("10_bartd")
+shader_parameter/fireball_scale_y = 1.0
+shader_parameter/glow_scale_y = -0.685
+shader_parameter/glow_strength = 6.15
+shader_parameter/glow_intensity = 0.77
+shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_jiftm")
+shader_parameter/pixel_size = 1
+shader_parameter/glow_position = Vector2(-0.855, -1.355)
+shader_parameter/glow_size = Vector2(2.35, 3.68)
+shader_parameter/pulsate = true
+shader_parameter/pulsation_speed = 0.19
+shader_parameter/glow_intensity_start = 0.33
+shader_parameter/glow_intensity_stop = 0.55
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqlbc"]
+shader = ExtResource("10_bartd")
+shader_parameter/fireball_scale_y = 1.73
+shader_parameter/glow_scale_y = 1.562
+shader_parameter/glow_strength = 6.345
+shader_parameter/glow_intensity = 0.565
+shader_parameter/noise = SubResource("NoiseTexture2D_rdkub")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_a7fx0")
+shader_parameter/pixel_size = 1
+shader_parameter/glow_position = Vector2(-0.76, -0.78)
+shader_parameter/glow_size = Vector2(2.16, 2.67)
+shader_parameter/pulsate = false
+shader_parameter/pulsation_speed = 0.305
+shader_parameter/glow_intensity_start = 0.66
+shader_parameter/glow_intensity_stop = 0.79
+
 [node name="Node2D" type="Node2D"]
-
-[node name="WellWhisperer" type="Node2D" parent="."]
-position = Vector2(-477, -71)
-scale = Vector2(2, 2)
-
-[node name="WellWhisperer" type="Sprite2D" parent="WellWhisperer"]
-position = Vector2(314, 104)
-texture = ExtResource("1_gmoni")
-
-[node name="WellWhispererMask" type="Sprite2D" parent="WellWhisperer"]
-material = ExtResource("2_wpby4")
-position = Vector2(314, 104)
-texture = ExtResource("3_vd1k7")
 
 [node name="Ninja" type="Node2D" parent="."]
 position = Vector2(128, 412)
@@ -181,6 +301,21 @@ texture = ExtResource("4_h15dg")
 [node name="NinjaMask" type="Sprite2D" parent="Ninja"]
 material = SubResource("ShaderMaterial_7w1kv")
 texture = ExtResource("6_rmks3")
+
+[node name="WellWhisperer" type="Node2D" parent="."]
+position = Vector2(114, 116)
+scale = Vector2(2, 2)
+
+[node name="WellWhisperer" type="Sprite2D" parent="WellWhisperer"]
+texture = ExtResource("1_rdkub")
+
+[node name="WellWhispererMask" type="Sprite2D" parent="WellWhisperer"]
+material = SubResource("ShaderMaterial_kgyxc")
+texture = ExtResource("3_n6wvv")
+
+[node name="WellWhispererMask2" type="Sprite2D" parent="WellWhisperer"]
+material = SubResource("ShaderMaterial_dwivy")
+texture = ExtResource("3_n6wvv")
 
 [node name="House" type="Node2D" parent="."]
 position = Vector2(704, 369)
@@ -194,6 +329,29 @@ material = SubResource("ShaderMaterial_5s46m")
 position = Vector2(0, -1)
 texture = ExtResource("8_hbkbp")
 script = ExtResource("9_6ec77")
+
+[node name="WellWhisperer2" type="Node2D" parent="."]
+position = Vector2(102, -67)
+scale = Vector2(2, 2)
+
+[node name="WellWhisperer" type="Sprite2D" parent="WellWhisperer2"]
+material = SubResource("ShaderMaterial_bartd")
+position = Vector2(314, 104)
+texture = ExtResource("1_gmoni")
+
+[node name="WellWhispererMask" type="Sprite2D" parent="WellWhisperer2"]
+material = ExtResource("2_wpby4")
+position = Vector2(314, 104)
+texture = ExtResource("3_vd1k7")
+
+[node name="Ninja2" type="Node2D" parent="."]
+position = Vector2(424, 130)
+scale = Vector2(2, 2)
+
+[node name="Ninja" type="Sprite2D" parent="Ninja2"]
+material = SubResource("ShaderMaterial_sqlbc")
+position = Vector2(3, 0)
+texture = ExtResource("4_h15dg")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
