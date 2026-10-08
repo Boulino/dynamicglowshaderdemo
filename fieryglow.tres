@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://ndqlm67idgj0"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ndqlm67idgj0"]
 
 [ext_resource type="Shader" uid="uid://bbjwickt7a8bo" path="res://fieryglow.gdshader" id="1_t30i8"]
 
